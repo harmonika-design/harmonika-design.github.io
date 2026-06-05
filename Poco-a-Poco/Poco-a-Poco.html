@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Poco a Poco音楽教室♪ | はじめての音楽が、一生の宝物になる</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700&display=swap">
+<style>
+  /* ---------- Reset & Base ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Zen Maru Gothic", system-ui, sans-serif;
+    font-weight: 500;
+    color: #2D3250;
+    background: #EEF4FF;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.02em;
+  }
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #EEF4FF;
+    --bg-soft: #DDEEFF;
+    --bg-pink: #FFDBED;
+    --pink: #FFB0D0;
+    --pink-dark: #FF8FC7;
+    --gold: #78B4E4;
+    --coral: #FF8FC7;
+    --ink: #2D3250;
+    --ink-soft: #6878A0;
+    --line: #C8DDEE;
+    --white: #FFFFFF;
+    --mint: #EDFFDB;
+  }
+
+  /* ---------- Animal SVG Helpers ---------- */
+  .animal-float {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .animal-float svg { display: block; }
+  @keyframes bobble {
+    0%, 100% { transform: translateY(0) rotate(-6deg); }
+    50% { transform: translateY(-8px) rotate(6deg); }
+  }
+  @keyframes bobble2 {
+    0%, 100% { transform: translateY(0) rotate(4deg); }
+    50% { transform: translateY(-10px) rotate(-4deg); }
+  }
+  @keyframes bobble3 {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-6px) rotate(8deg) scale(1.05); }
+  }
+  @keyframes pawWalk {
+    0%, 100% { opacity: .18; transform: scale(1) rotate(-10deg); }
+    50% { opacity: .35; transform: scale(1.1) rotate(10deg); }
+  }
+  .paw-deco {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.18;
+    z-index: 0;
+  }
+
+  /* ---------- Layout ---------- */
+  .page { max-width: 480px; margin: 0 auto; background: var(--bg); position: relative; overflow: hidden; }
+  section { padding: 48px 24px 64px; position: relative; }
+  .section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .section-eyebrow::before {
+    content: "";
+    width: 16px;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 32' fill='%2378B4E4' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='8' cy='26' rx='6' ry='4.5' transform='rotate(-20 8 26)'/%3E%3Crect x='13' y='4' width='2.2' height='24' rx='1'/%3E%3Cpath d='M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .section-eyebrow::after {
+    content: "";
+    width: 16px;
+    height: 20px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 32' fill='%23FF8FC7' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='8' cy='26' rx='6' ry='4.5' transform='rotate(-20 8 26)'/%3E%3Crect x='13' y='4' width='2.2' height='24' rx='1'/%3E%3Cpath d='M15.2 4 C20 6 22 11 18 14 C16 12 15.2 9 15.2 7z'/%3E%3Cpath d='M15.2 10 C20 12 22 17 18 20 C16 18 15.2 15 15.2 13z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .section-eyebrow.left::before { display: none; }
+  h2.section-title {
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 1.5;
+    margin: 0 0 32px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  h2.section-title .accent { color: var(--pink-dark); }
+
+  /* ---------- Header (minimal) ---------- */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(238, 244, 255, 0.94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(200, 221, 238, 0.6);
+  }
+  .brand { display: flex; align-items: center; gap: 8px; }
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #DDEEFF 0%, #FF8FC7 100%);
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-size: 14px;
+  }
+  .brand-name { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; }
+  .top-bar .tel-mini {
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .top-bar .tel-mini strong { color: var(--ink); font-weight: 700; font-size: 13px; }
+
+  /* ---------- Hamburger menu ---------- */
+  .menu-toggle {
+    position: fixed;
+    top: 14px;
+    right: max(14px, calc(50vw - 240px + 14px));
+    z-index: 55;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 14px rgba(40, 50, 80, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .menu-toggle:active { background: var(--bg-pink); }
+  .menu-open .menu-toggle {
+    background: var(--white);
+    box-shadow: none;
+    border-color: transparent;
+  }
+  .menu-toggle .bars {
+    width: 18px;
+    height: 12px;
+    position: relative;
+  }
+  .menu-toggle .bars span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+  }
+  .menu-toggle .bars span:nth-child(1) { top: 0; }
+  .menu-toggle .bars span:nth-child(2) { top: 5px; }
+  .menu-toggle .bars span:nth-child(3) { top: 10px; }
+  .menu-open .menu-toggle .bars span:nth-child(1) { top: 5px; transform: rotate(45deg); }
+  .menu-open .menu-toggle .bars span:nth-child(2) { opacity: 0; }
+  .menu-open .menu-toggle .bars span:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45, 50, 80, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 45;
+  }
+  .menu-open .menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .menu-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: min(82%, 360px);
+    background: var(--bg);
+    z-index: 60;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -8px 0 28px rgba(40, 50, 80, 0.12);
+  }
+  .menu-open .menu-panel { transform: translateX(0); }
+  .menu-panel-head {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  .menu-panel-head .label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .menu-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .menu-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+  }
+  .menu-nav a {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+  }
+  .menu-nav a:active { background: var(--bg-pink); }
+  .menu-nav .num {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px;
+    color: var(--pink-dark);
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+  .menu-nav .en {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+  .menu-nav .arrow {
+    color: var(--ink-soft);
+    font-size: 14px;
+  }
+  .menu-panel-foot {
+    padding: 16px 20px 24px;
+    border-top: 1px solid var(--line);
+    background: var(--white);
+  }
+  .menu-tel-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+  .menu-tel-card .icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--bg-pink);
+    display: grid;
+    place-items: center;
+    color: var(--pink-dark);
+    font-size: 16px;
+  }
+  .menu-tel-card .num {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .menu-tel-card .label-mini {
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+  }
+  .menu-panel-foot .btn-primary {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  body.menu-open { overflow: hidden; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 32px 24px 0;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .hero > *:not(.animal-float):not(.hero-particle) {
+    position: relative;
+    z-index: 2;
+  }
+  .hero::before { display: none; }
+  .hero::after { display: none; }
+
+  /* Floating notes & birds */
+  .hero-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes noteFloat1 {
+    0%, 100% { transform: translateY(0) rotate(-8deg) scale(1); }
+    50% { transform: translateY(-12px) rotate(8deg) scale(1.05); }
+  }
+  @keyframes noteFloat2 {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-10px) rotate(-10deg); }
+  }
+  @keyframes birdFloat {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(6px, -8px) rotate(3deg); }
+    50% { transform: translate(12px, -4px) rotate(-2deg); }
+    75% { transform: translate(6px, -10px) rotate(4deg); }
+  }
+  .hero-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .hero-tag .dot { color: var(--pink-dark); margin-right: 6px; }
+  .hero h1 {
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.55;
+    margin: 0 0 24px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-wrap: pretty;
+    text-align: left;
+  }
+  .hero h1 .pink { color: var(--pink-dark); }
+  .hero h1 .underline {
+    background: linear-gradient(transparent 60%, rgba(255, 143, 199, 0.35) 60%);
+    padding: 0 2px;
+  }
+  .hero-lead {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+    line-height: 1.9;
+    text-align: left;
+  }
+  .hero-class {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 8px;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .hero-photo {
+    position: relative;
+    margin: 20px -24px 0;
+    overflow: hidden;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, transparent 15%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero-cta-area {
+    padding: 0 24px 48px;
+    position: relative;
+    z-index: 2;
+    margin-top: -40px;
+    background: linear-gradient(180deg, transparent 0%, var(--bg) 30%);
+  }
+  .piano-illust {
+    position: relative;
+    margin: 32px 0 28px;
+    height: 130px;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 24px rgba(40, 50, 80, 0.06);
+    overflow: hidden;
+  }
+  .piano-keys {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    border-top: 2px solid var(--ink);
+  }
+  .piano-key-white {
+    flex: 1;
+    background: #FEFCFA;
+    border-right: 1px solid #E5D8CB;
+    position: relative;
+  }
+  .piano-key-white:last-child { border-right: none; }
+  .piano-key-black {
+    position: absolute;
+    top: 0;
+    width: 9%;
+    height: 60%;
+    background: var(--ink);
+    border-radius: 0 0 3px 3px;
+    z-index: 2;
+  }
+  .piano-illust-label {
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+  }
+  .piano-illust-label strong { color: var(--pink-dark); font-weight: 700; }
+  .piano-note-float {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    animation: bobble3 3s ease-in-out infinite;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #FF8FC7 0%, #F070AA 100%);
+    color: var(--white);
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 8px 20px rgba(255, 143, 199, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:active { transform: translateY(1px); box-shadow: 0 4px 12px rgba(255, 143, 199, 0.3); }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+  .btn-primary .badge {
+    background: rgba(255,255,255,0.25);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 16px 20px;
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1.5px solid var(--ink);
+  }
+  .btn-line {
+    background: #06C755;
+    color: var(--white);
+    border-color: #06C755;
+    border-radius: 999px;
+  }
+  .hero-cta-helper {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .hero-cta-helper::before, .hero-cta-helper::after {
+    content: ""; width: 20px; height: 1px; background: var(--line);
+  }
+
+  /* ---------- News (text-based blog) ---------- */
+  .news {
+    padding: 48px 24px 56px;
+    background: var(--bg);
+  }
+  .news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .news-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .news-item:first-child { padding-top: 0; }
+  .news-item:last-child { border-bottom: none; }
+  .news-item:active { background: var(--bg-pink); margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
+  .news-date {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    padding-top: 2px;
+    min-width: 68px;
+  }
+  .news-body { min-width: 0; }
+  .news-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    line-height: 1.6;
+  }
+  .news-tag.tag-info { background: var(--bg-pink); color: var(--pink-dark); }
+  .news-tag.tag-event { background: rgba(221, 238, 255, 0.6); color: #5090C0; }
+  .news-tag.tag-lesson { background: rgba(237, 255, 219, 0.6); color: #5A9A50; }
+  .news-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .news-excerpt {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-top: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .news-item.is-new .news-title::after {
+    content: "NEW";
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 9px;
+    font-weight: 700;
+    background: var(--coral);
+    color: var(--white);
+    vertical-align: middle;
+    letter-spacing: 0.1em;
+    line-height: 1.6;
+  }
+  .news-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--pink-dark);
+    font-weight: 700;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- News Modal ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(45, 50, 80, 0.4);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 100%;
+    max-width: 480px;
+    max-height: 85dvh;
+    background: var(--bg);
+    border-radius: 20px 20px 0 0;
+    z-index: 110;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    box-shadow: 0 -8px 40px rgba(40, 50, 80, 0.15);
+  }
+  .modal-overlay.active + .modal-container,
+  .modal-container.active { transform: translateX(-50%) translateY(0); }
+  .modal-handle {
+    padding: 12px 0 8px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .modal-handle::before {
+    content: "";
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line);
+  }
+  .modal-header {
+    padding: 0 24px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+  }
+  .modal-header-info { flex: 1; }
+  .modal-header .news-tag { margin-bottom: 6px; }
+  .modal-header .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .modal-header .modal-date {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+  }
+  .modal-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    color: var(--ink);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .modal-scroll {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 24px;
+  }
+  .modal-hero-img {
+    width: calc(100% + 48px);
+    margin: -24px -24px 24px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+  .modal-article {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 2;
+  }
+  .modal-article p {
+    margin: 0 0 16px;
+  }
+  .modal-article img {
+    width: calc(100% + 48px);
+    margin: 8px -24px 16px;
+    display: block;
+    object-fit: cover;
+    max-height: 300px;
+  }
+  .modal-article .img-caption {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: -10px;
+    margin-bottom: 16px;
+  }
+  body.modal-open { overflow: hidden; }
+
+  .news-loading {
+    text-align: center;
+    padding: 24px 0;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .news-error {
+    text-align: center;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px dashed var(--line);
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  .worries {
+    background: var(--bg-soft);
+    padding: 48px 24px 64px;
+  }
+  .worry-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .worry-item {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 20px 20px 20px 56px;
+    position: relative;
+    border: 1px solid var(--line);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .worry-item::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 32' fill='%23FF8FC7' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='8' cy='26' rx='6' ry='4.5' transform='rotate(-20 8 26)'/%3E%3Crect x='13' y='4' width='2.2' height='24' rx='1'/%3E%3Cpath d='M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .worry-item::after { display: none; }
+  .worries-bridge {
+    margin-top: 36px;
+    text-align: center;
+    padding: 24px 20px;
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px dashed var(--pink);
+    position: relative;
+  }
+  .worries-bridge::before {
+    content: "▼";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--pink);
+    font-size: 14px;
+  }
+  .worries-bridge p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .worries-bridge p .em {
+    color: var(--pink-dark);
+    font-size: 16px;
+  }
+
+  /* ---------- Features ---------- */
+  .features { padding: 48px 24px 64px; }
+  .feature-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card:last-child { margin-bottom: 0; }
+  .feature-card { border-radius: 24px; }
+  .feature-num {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .feature-num .big {
+    font-size: 38px;
+    line-height: 1;
+    display: block;
+    margin-top: 2px;
+    color: var(--pink-dark);
+    letter-spacing: 0;
+  }
+  .feature-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 12px 0 12px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .feature-card p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+  }
+  .feature-icon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--bg-pink);
+    display: grid;
+    place-items: center;
+    color: var(--pink-dark);
+    padding: 10px;
+  }
+  .feature-icon svg { width: 100%; height: 100%; }
+
+  /* ---------- Teacher ---------- */
+  .teacher {
+    background: linear-gradient(180deg, #DDEEFF 0%, #EEF4FF 100%);
+    padding: 48px 24px 64px;
+  }
+  .teacher-card {
+    background: var(--white);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .teacher-portrait {
+    height: 240px;
+    background:
+      repeating-linear-gradient(45deg, #FFDBED 0 8px, #DDEEFF 8px 16px);
+    display: grid;
+    place-items: center;
+    position: relative;
+    color: var(--pink-dark);
+    font-family: ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .teacher-portrait .portrait-frame {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--white);
+    box-shadow: 0 8px 20px rgba(40, 50, 80, 0.08);
+    display: grid;
+    place-items: center;
+    font-family: "Zen Old Mincho", serif;
+    font-size: 38px;
+    color: var(--pink-dark);
+    font-weight: 700;
+  }
+  .teacher-portrait .portrait-note {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    background: rgba(255,255,255,0.7);
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+  .teacher-body { padding: 28px 24px 32px; }
+  .teacher-name-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .teacher-role {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  .teacher-name {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+  }
+  .teacher-name .ruby { font-size: 11px; color: var(--ink-soft); font-weight: 500; margin-left: 6px; letter-spacing: 0.1em; }
+  .teacher-credentials {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: var(--bg);
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.85;
+  }
+  .teacher-credentials li {
+    list-style: none;
+    padding-left: 16px;
+    position: relative;
+  }
+  .teacher-credentials li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 12px;
+    height: 16px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 32' fill='%23FF8FC7' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='8' cy='26' rx='6' ry='4.5' transform='rotate(-20 8 26)'/%3E%3Crect x='13' y='4' width='2.2' height='24' rx='1'/%3E%3Cpath d='M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .teacher-credentials ul { margin: 0; padding: 0; }
+  .teacher-message {
+    margin-top: 20px;
+    padding: 20px 18px;
+    background: var(--bg-pink);
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.95;
+    color: var(--ink);
+    position: relative;
+  }
+  .teacher-message::before {
+    content: "“";
+    position: absolute;
+    top: 0px;
+    left: 8px;
+    font-family: "Zen Old Mincho", serif;
+    font-size: 48px;
+    color: var(--pink);
+    line-height: 1;
+  }
+  .teacher-message-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--pink-dark);
+    font-weight: 700;
+    margin-bottom: 6px;
+    padding-left: 14px;
+  }
+  .teacher-message p { margin: 0; padding-left: 14px; }
+
+  /* ---------- Lessons / Pricing ---------- */
+  .lessons { padding: 48px 24px 64px; }
+  .price-table {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .price-row {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 18px 18px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: center;
+  }
+  .price-row.featured {
+    border-color: #FF8FC7;
+    background: var(--bg-pink);
+    position: relative;
+  }
+  .price-row.featured::before {
+    content: "おすすめ";
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: #FF8FC7;
+    color: var(--white);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+  }
+  .price-target {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .price-meta {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+  .price-amount {
+    text-align: right;
+    font-family: "Zen Old Mincho", serif;
+    font-weight: 700;
+  }
+  .price-amount .num {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .price-amount .unit {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-left: 2px;
+  }
+  .price-amount .freq {
+    display: block;
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-family: "Zen Maru Gothic", sans-serif;
+    font-weight: 500;
+  }
+  .lesson-times {
+    margin-top: 24px;
+    background: var(--bg-soft);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .lesson-times h4 {
+    margin: 0 0 12px;
+    font-size: 13px;
+    color: var(--ink);
+    letter-spacing: 0.1em;
+  }
+  .time-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .time-chip {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .lessons-note {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+  }
+
+  /* ---------- Voices ---------- */
+  .voices {
+    background: var(--bg-soft);
+    padding: 48px 24px 64px;
+  }
+  .voice-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 24px 20px;
+    border: 1px solid var(--line);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .voice-card:last-child { margin-bottom: 0; }
+  .voice-quote-mark {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-family: "Zen Old Mincho", serif;
+    font-size: 48px;
+    color: var(--pink);
+    opacity: 0.4;
+    line-height: 1;
+  }
+  .voice-stars {
+    color: var(--gold);
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+  .voice-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .voice-body {
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    margin: 0 0 14px;
+  }
+  .voice-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .voice-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-pink);
+    color: var(--pink-dark);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq { padding: 48px 24px 64px; }
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 18px 50px 18px 56px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.6;
+    position: relative;
+    cursor: pointer;
+  }
+  .faq-q::before {
+    content: "Q";
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: var(--white);
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+  }
+  .faq-q::after {
+    content: "";
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid var(--pink-dark);
+    border-bottom: 2px solid var(--pink-dark);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform 0.25s;
+  }
+  .faq-item.open .faq-q::after {
+    transform: translateY(-20%) rotate(-135deg);
+  }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .faq-item.open .faq-a {
+    max-height: 400px;
+  }
+  .faq-a-inner {
+    padding: 0 20px 20px 56px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    position: relative;
+  }
+  .faq-a-inner::before {
+    content: "A";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-pink);
+    color: var(--pink-dark);
+    font-family: "Zen Old Mincho", serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    border: 1.5px solid var(--pink);
+  }
+
+  /* ---------- Access ---------- */
+  .access { padding: 48px 24px 64px; background: var(--bg-soft); }
+  .map-area {
+    width: 100%;
+    height: 220px;
+    background:
+      linear-gradient(135deg, rgba(221, 238, 255, 0.2) 0%, rgba(255, 219, 237, 0.2) 100%),
+      repeating-linear-gradient(0deg, transparent 0 24px, rgba(100, 120, 160, 0.08) 24px 25px),
+      repeating-linear-gradient(90deg, transparent 0 24px, rgba(100, 120, 160, 0.08) 24px 25px),
+      var(--white);
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--coral);
+    transform: translate(-50%, -100%) rotate(-45deg);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 6px 16px rgba(255, 143, 199, 0.35);
+  }
+  .map-pin::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--white);
+    transform: rotate(45deg);
+  }
+  .map-label {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-family: ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,0.9);
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .access-info {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 8px 0;
+  }
+  .access-row {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 13px;
+  }
+  .access-row:last-child { border-bottom: none; }
+  .access-label {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding-top: 2px;
+  }
+  .access-value { color: var(--ink); line-height: 1.7; }
+  .access-value .small { font-size: 12px; color: var(--ink-soft); display: block; margin-top: 2px; }
+
+  /* ---------- Contact ---------- */
+  /* ---------- Store badge & two-up ---------- */
+  .store-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    background: linear-gradient(135deg, #FF8FC7 0%, #F070AA 100%);
+    padding: 6px 14px 6px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    box-shadow: 0 4px 12px rgba(255, 143, 199, 0.3);
+  }
+  .store-badge.blue {
+    background: linear-gradient(135deg, #78B4E4 0%, #5C97D0 100%);
+    box-shadow: 0 4px 12px rgba(120, 180, 228, 0.3);
+  }
+  .store-badge .pin { font-size: 13px; }
+  .teacher-store + .teacher-store { margin-top: 32px; }
+  .access-store + .access-store { margin-top: 36px; }
+
+  /* ---------- Instagram feed ---------- */
+  .insta-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .insta-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 18px 16px;
+  }
+  .insta-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #FFD060 0%, #FF8FC7 45%, #78B4E4 100%);
+    padding: 3px;
+    display: grid;
+    place-items: center;
+  }
+  .insta-avatar .inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--white);
+    display: grid;
+    place-items: center;
+  }
+  .insta-avatar .inner span {
+    font-size: 24px;
+    line-height: 1;
+  }
+  .insta-meta { flex: 1; min-width: 0; }
+  .insta-handle {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .insta-handle .verified { color: #FF8FC7; font-size: 13px; }
+  .insta-stats {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .insta-stats b { color: var(--ink); font-weight: 700; }
+  .insta-follow {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    background: linear-gradient(135deg, #FF8FC7 0%, #F070AA 100%);
+    padding: 8px 16px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(255, 143, 199, 0.3);
+  }
+  .insta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .insta-tile {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+  }
+  .insta-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .insta-tile .ph {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-size: 34px;
+  }
+  .insta-tile .cap {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 14px 8px 7px;
+    font-size: 10px;
+    color: var(--white);
+    background: linear-gradient(180deg, transparent, rgba(45,50,80,0.45));
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .insta-t1 { background: linear-gradient(135deg, #FFE0EF, #FFC2DF); }
+  .insta-t2 { background: linear-gradient(135deg, #DDEEFF, #BCD8F5); }
+  .insta-t3 { background: linear-gradient(135deg, #EDFFDB, #D2F0B8); }
+  .insta-t4 { background: linear-gradient(135deg, #FFF3D0, #FFE08A); }
+  .insta-t5 { background: linear-gradient(135deg, #E8DCFF, #D0BEF5); }
+  .insta-t6 { background: linear-gradient(135deg, #FFDBED, #FFB0D0); }
+  .insta-foot {
+    padding: 16px 18px 18px;
+    text-align: center;
+  }
+  .insta-foot a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pink-dark);
+    text-decoration: none;
+    border: 1.5px solid var(--pink);
+    border-radius: 999px;
+    padding: 11px 22px;
+    background: var(--white);
+  }
+  .news-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---------- Map embed ---------- */
+  .map-embed {
+    width: 100%;
+    height: 220px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    padding: 48px 24px 120px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 219, 237, 0.3), transparent 60%),
+      var(--bg);
+  }
+  .contact-lead {
+    text-align: center;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.9;
+    margin: 0 0 32px;
+  }
+  .contact-tel-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .contact-tel-label {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .contact-tel-num {
+    font-family: "Zen Old Mincho", serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .contact-tel-num::before {
+    content: "☏";
+    font-size: 24px;
+    color: var(--pink-dark);
+  }
+  .contact-tel-hours {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 32px 24px 96px;
+    text-align: center;
+    background: #2D3250;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  footer .brand-name { color: rgba(255,255,255,0.9); margin-bottom: 6px; }
+
+  /* ---------- Sticky bottom CTA ---------- */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    padding: 12px 16px;
+    background: rgba(238, 244, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    z-index: 50;
+    display: flex;
+    gap: 8px;
+  }
+  .sticky-cta .btn-tel {
+    flex: 0 0 56px;
+    height: 52px;
+    border-radius: 999px;
+    background: var(--white);
+    border: 1.5px solid var(--ink);
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    color: var(--ink);
+  }
+  .sticky-cta .btn-primary {
+    flex: 1;
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  /* ---------- Accessibility / Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page" data-screen-label="LP">
+
+  <!-- Top bar -->
+  <header class="top-bar">
+    <a class="brand" href="#top">
+      <div class="brand-mark"><svg viewBox="0 0 24 32" fill="white" width="14" height="19"><ellipse cx="8" cy="26" rx="6" ry="4.5" transform="rotate(-20 8 26)"/><rect x="13" y="4" width="2.2" height="24" rx="1"/><path d="M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z"/></svg></div>
+      <div class="brand-name">Poco a Poco音楽教室♪</div>
+    </a>
+  </header>
+
+  <!-- Floating menu button (always visible at top-right) -->
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="menuPanel">
+    <span class="bars" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </span>
+  </button>
+
+  <!-- Slide-in menu -->
+  <div class="menu-overlay" id="menuOverlay" aria-hidden="true"></div>
+  <aside class="menu-panel" id="menuPanel" aria-label="サイトナビゲーション" aria-hidden="true">
+    <div class="menu-panel-head">
+      <div class="label">MENU</div>
+      <button class="menu-close" id="menuClose" aria-label="メニューを閉じる">✕</button>
+    </div>
+    <nav class="menu-nav">
+      <a href="#top" data-menu-link>
+        <span class="num">01</span>
+        <span>ホーム<span class="en">HOME</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#worries" data-menu-link>
+        <span class="num">02</span>
+        <span>お悩み<span class="en">WORRIES</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#features" data-menu-link>
+        <span class="num">03</span>
+        <span>教室の特徴<span class="en">3 REASONS</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#teacher" data-menu-link>
+        <span class="num">04</span>
+        <span>講師紹介<span class="en">TEACHER</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#lessons" data-menu-link>
+        <span class="num">05</span>
+        <span>レッスン・料金<span class="en">LESSON &amp; FEE</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#voices" data-menu-link>
+        <span class="num">06</span>
+        <span>生徒さんの声<span class="en">VOICES</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#faq" data-menu-link>
+        <span class="num">07</span>
+        <span>よくある質問<span class="en">FAQ</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#news" data-menu-link>
+        <span class="num">08</span>
+        <span>お知らせ<span class="en">INSTAGRAM</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#access" data-menu-link>
+        <span class="num">09</span>
+        <span>アクセス<span class="en">ACCESS</span></span>
+        <span class="arrow">›</span>
+      </a>
+      <a href="#contact" data-menu-link>
+        <span class="num">10</span>
+        <span>お問い合わせ<span class="en">CONTACT</span></span>
+        <span class="arrow">›</span>
+      </a>
+    </nav>
+    <div class="menu-panel-foot">
+      <a class="menu-tel-card" href="tel:0123456789">
+        <span class="icon">☏</span>
+        <div>
+          <div class="num">0123-45-6789</div>
+          <div class="label-mini">受付 平日 10:00–19:00</div>
+        </div>
+      </a>
+      <a href="#contact" class="btn-primary" data-menu-link>
+        <span class="badge">無料</span>
+        <span>体験レッスンを申し込む</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- 1. Hero -->
+  <section class="hero" id="top" data-screen-label="01 Hero">
+    <!-- Motifs around text area — dense & vivid -->
+    <span style="position:absolute;top:62px;right:24px;font-size:22px;color:#FF8FC7;opacity:.55;animation:bobble 3.5s ease-in-out infinite;pointer-events:none;z-index:1;">♪</span>
+    <span style="position:absolute;top:72px;right:58px;font-size:14px;color:#FFD060;opacity:.5;animation:bobble3 4s ease-in-out 0.8s infinite;pointer-events:none;z-index:1;">★</span>
+    <span style="position:absolute;top:95px;left:14px;font-size:20px;color:#78B4E4;opacity:.5;animation:bobble2 4.5s ease-in-out 0.5s infinite;pointer-events:none;z-index:1;">♫</span>
+    <span style="position:absolute;top:82px;left:52px;font-size:12px;color:#A8D88A;opacity:.45;animation:bobble 3.8s ease-in-out 1s infinite;pointer-events:none;z-index:1;">♩</span>
+    <span style="position:absolute;top:130px;right:18px;font-size:16px;color:#A8D88A;opacity:.5;animation:bobble3 3.2s ease-in-out 0.3s infinite;pointer-events:none;z-index:1;">♩</span>
+    <span style="position:absolute;top:140px;left:22px;font-size:11px;color:#FFD060;opacity:.5;animation:bobble 4.2s ease-in-out 0.6s infinite;pointer-events:none;z-index:1;">★</span>
+    <span style="position:absolute;top:175px;right:40px;font-size:20px;color:#FFD060;opacity:.5;animation:bobble2 4s ease-in-out 1s infinite;pointer-events:none;z-index:1;">♬</span>
+    <span style="position:absolute;top:190px;left:10px;font-size:14px;color:#FF8FC7;opacity:.45;animation:bobble3 3.6s ease-in-out 0.2s infinite;pointer-events:none;z-index:1;">❤</span>
+    <span style="position:absolute;top:200px;right:70px;font-size:10px;color:#78B4E4;opacity:.4;animation:bobble 5s ease-in-out 1.4s infinite;pointer-events:none;z-index:1;">♩</span>
+    <span style="position:absolute;top:230px;left:45px;font-size:18px;color:#78B4E4;opacity:.5;animation:bobble2 3.4s ease-in-out 0.7s infinite;pointer-events:none;z-index:1;">♪</span>
+    <span style="position:absolute;top:240px;right:22px;font-size:12px;color:#A8D88A;opacity:.45;animation:bobble3 4.5s ease-in-out 0.4s infinite;pointer-events:none;z-index:1;">★</span>
+    <span style="position:absolute;top:270px;left:16px;font-size:16px;color:#FF8FC7;opacity:.5;animation:bobble 3.8s ease-in-out 1.2s infinite;pointer-events:none;z-index:1;">♫</span>
+    <span style="position:absolute;top:280px;right:48px;font-size:20px;color:#FF8FC7;opacity:.55;animation:bobble2 3.2s ease-in-out 0.1s infinite;pointer-events:none;z-index:1;">♪</span>
+    <span style="position:absolute;top:300px;left:55%;font-size:13px;color:#FFD060;opacity:.45;animation:bobble3 4.8s ease-in-out 0.9s infinite;pointer-events:none;z-index:1;">❤</span>
+    <span style="position:absolute;top:310px;left:30px;font-size:10px;color:#A8D88A;opacity:.4;animation:bobble 4s ease-in-out 1.5s infinite;pointer-events:none;z-index:1;">♩</span>
+    <span style="position:absolute;top:330px;right:30px;font-size:15px;color:#78B4E4;opacity:.45;animation:bobble2 3.6s ease-in-out 0.6s infinite;pointer-events:none;z-index:1;">♬</span>
+    <span style="position:absolute;top:350px;left:40px;font-size:18px;color:#FFD060;opacity:.5;animation:bobble3 3.4s ease-in-out 0.3s infinite;pointer-events:none;z-index:1;">★</span>
+    <!-- Floating notes (sparse, top) -->
+<!-- bird blue -->
+    <!-- quarter rest green -->
+    <!-- bird yellow -->
+    <!-- 8th note pink -->
+    <!-- 16th note blue -->
+    <div class="hero-class">POCO A POCO MUSIC SCHOOL</div>
+    <span class="hero-tag"><span class="dot">●</span>体験レッスン受付中</span>
+    <h1>
+      はじめての音楽が、<br />
+      <span class="underline pink">一生の宝物</span>になる。
+    </h1>
+    <p class="hero-lead">
+      4歳から大人まで。<br />
+      ひとりひとりのペースに寄り添う、<br />
+      ○○市の小さなピアノ教室です。
+    </p>
+
+    <div class="hero-photo">
+      <img src="assets/hero-animals.jpg" alt="動物たちが楽器を演奏しているイラスト" loading="eager" />
+    </div>
+  </section>
+
+  <div class="hero-cta-area">
+    <a href="#contact" class="btn-primary">
+      <span class="badge">無料</span>
+      <span>体験レッスンを申し込む</span>
+      <span class="arrow">→</span>
+    </a>
+    <div class="hero-cta-helper">所要時間 約30分 / ご家族での見学OK</div>
+  </div>
+
+  <!-- 2. Worries -->
+  <section class="worries" id="worries" data-screen-label="02 Worries">
+    <div class="section-eyebrow left">WORRIES</div>
+    <h2 class="section-title">こんな<span class="accent">お悩み</span>、<br />ありませんか？</h2>
+    <ul class="worry-list">
+      <li class="worry-item">うちの子にピアノは早いかな…</li>
+      <li class="worry-item">途中で飽きずに続けられるか心配</li>
+      <li class="worry-item">どの教室を選べばいいか分からない</li>
+      <li class="worry-item">大人になってから始めても大丈夫？</li>
+    </ul>
+    <div class="worries-bridge">
+      <p>
+        <span class="em">そのお悩み、</span><br />
+        Poco a Poco音楽教室♪にお任せください。
+      </p>
+    </div>
+  </section>
+
+  <!-- 3. Features -->
+  <section class="features" id="features" data-screen-label="03 Features">
+    <div class="section-eyebrow left">3 REASONS</div>
+    <h2 class="section-title">選ばれる<br /><span class="accent">3つの理由</span></h2>
+
+    <article class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 40 40" fill="none"><path d="M10 18l5-11 7 9z" fill="#FF8FC7"/><path d="M30 18l-5-11-7 9z" fill="#FF8FC7"/><circle cx="20" cy="25" r="13" fill="#FF8FC7"/><circle cx="15" cy="22" r="2" fill="#fff"/><circle cx="25" cy="22" r="2" fill="#fff"/><circle cx="15" cy="22.8" r="1" fill="#2D3250"/><circle cx="25" cy="22.8" r="1" fill="#2D3250"/><ellipse cx="20" cy="27" rx="2" ry="1.3" fill="#fff"/><path d="M18 28q2 1.5 4 0" stroke="#fff" stroke-width=".8" fill="none" stroke-linecap="round"/></svg></div>
+      <div class="feature-num">POINT <span class="big">01</span></div>
+      <h3>ひとりひとりに合わせた<br />完全個人レッスン</h3>
+      <p>性格・年齢・目標に合わせて、教材も進度もオーダーメイド。「自分のペースで」確実にステップアップできます。</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 40 48" fill="none"><ellipse cx="15" cy="10" rx="5.5" ry="12" fill="#FF8FC7"/><ellipse cx="25" cy="10" rx="5.5" ry="12" fill="#FF8FC7"/><ellipse cx="15" cy="10" rx="3" ry="8" fill="#FFDBED"/><ellipse cx="25" cy="10" rx="3" ry="8" fill="#FFDBED"/><circle cx="20" cy="30" r="14" fill="#FF8FC7"/><circle cx="15" cy="27" r="2" fill="#fff"/><circle cx="25" cy="27" r="2" fill="#fff"/><circle cx="15" cy="27.8" r="1" fill="#2D3250"/><circle cx="25" cy="27.8" r="1" fill="#2D3250"/><ellipse cx="20" cy="32" rx="1.8" ry="1.2" fill="#fff"/></svg></div>
+      <div class="feature-num">POINT <span class="big">02</span></div>
+      <h3>音大卒の講師による<br />本格的な指導</h3>
+      <p>基礎をていねいに、正しい姿勢と指づかいから。趣味の方からコンクール志望まで、本格的にレッスンします。</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="10" cy="10" r="6" fill="#FF8FC7" opacity=".7"/><circle cx="30" cy="10" r="6" fill="#FF8FC7" opacity=".7"/><circle cx="20" cy="22" r="15" fill="#FF8FC7"/><circle cx="14" cy="19" r="2" fill="#fff"/><circle cx="26" cy="19" r="2" fill="#fff"/><circle cx="14" cy="19.8" r="1" fill="#2D3250"/><circle cx="26" cy="19.8" r="1" fill="#2D3250"/><ellipse cx="20" cy="25" rx="3.5" ry="2.8" fill="#FFDBED"/><circle cx="20" cy="24" r="1.8" fill="#2D3250" opacity=".4"/></svg></div>
+      <div class="feature-num">POINT <span class="big">03</span></div>
+      <h3>発表会やイベントで<br />成長を実感できる</h3>
+      <p>年に一度のホール発表会、季節のミニコンサート。人前で弾く経験が、自信と達成感を育てます。</p>
+    </article>
+  </section>
+
+  <!-- 4. Teacher -->
+  <section class="teacher" id="teacher" data-screen-label="04 Teacher">
+    <div class="section-eyebrow left">TEACHER</div>
+    <h2 class="section-title">講師<span class="accent">紹介</span></h2>
+
+    <!-- 桂坂教室 -->
+    <div class="teacher-store">
+      <span class="store-badge"><span class="pin">📍</span>桂坂教室</span>
+      <div class="teacher-card">
+        <div class="teacher-portrait" aria-label="講師写真プレースホルダー">
+          <div class="portrait-frame">美</div>
+          <div class="portrait-note">
+            <svg viewBox="0 0 24 32" fill="#FF8FC7" width="12" height="16" style="display:inline;vertical-align:middle;margin-right:2px;"><ellipse cx="8" cy="26" rx="6" ry="4.5" transform="rotate(-20 8 26)"/><rect x="13" y="4" width="2.2" height="24" rx="1"/><path d="M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z"/></svg>
+            teacher portrait placeholder
+          </div>
+        </div>
+        <div class="teacher-body">
+          <div class="teacher-role">PIANO TEACHER</div>
+          <div class="teacher-name-row">
+            <h3 class="teacher-name">田中 美咲<span class="ruby">たなか みさき</span></h3>
+          </div>
+          <div class="teacher-credentials">
+            <ul>
+              <li>○○音楽大学 ピアノ科 卒業</li>
+              <li>5歳よりピアノを始める</li>
+              <li>講師歴 12年（生徒数 80名以上）</li>
+              <li>2児の母／ヤマハ指導者検定取得</li>
+            </ul>
+          </div>
+          <div class="teacher-message">
+            <div class="teacher-message-label">MESSAGE</div>
+            <p>はじめまして、田中美咲です。ピアノは「続けること」がいちばん難しく、いちばん大切。だからこそ、お子さまも大人の方も「また来週も弾きたい」と思える時間を、一緒につくっていきたいと思っています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 梅津教室 -->
+    <div class="teacher-store">
+      <span class="store-badge blue"><span class="pin">📍</span>梅津教室</span>
+      <div class="teacher-card">
+        <div class="teacher-portrait" aria-label="講師写真プレースホルダー">
+          <div class="portrait-frame">奏</div>
+          <div class="portrait-note">
+            <svg viewBox="0 0 24 32" fill="#78B4E4" width="12" height="16" style="display:inline;vertical-align:middle;margin-right:2px;"><ellipse cx="8" cy="26" rx="6" ry="4.5" transform="rotate(-20 8 26)"/><rect x="13" y="4" width="2.2" height="24" rx="1"/><path d="M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z"/></svg>
+            teacher portrait placeholder
+          </div>
+        </div>
+        <div class="teacher-body">
+          <div class="teacher-role">PIANO TEACHER</div>
+          <div class="teacher-name-row">
+            <h3 class="teacher-name">佐藤 奏<span class="ruby">さとう かなで</span></h3>
+          </div>
+          <div class="teacher-credentials">
+            <ul>
+              <li>△△音楽大学 器楽科 卒業</li>
+              <li>4歳よりピアノを始める</li>
+              <li>講師歴 8年（生徒数 50名以上）</li>
+              <li>リトミック指導資格 取得</li>
+            </ul>
+          </div>
+          <div class="teacher-message">
+            <div class="teacher-message-label">MESSAGE</div>
+            <p>こんにちは、佐藤奏です。「楽しい！」という気持ちが、上達のいちばんの近道だと思っています。一人ひとりの個性に寄り添いながら、音楽が一生の友だちになるようなレッスンを心がけています。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Lessons / Pricing -->
+  <section class="lessons" id="lessons" data-screen-label="05 Lessons">
+    <div class="section-eyebrow left">LESSON & FEE</div>
+    <h2 class="section-title">レッスン内容と<br /><span class="accent">月謝</span>のご案内</h2>
+    <div class="price-table">
+      <div class="price-row">
+        <div>
+          <div class="price-target">グループレッスン</div>
+          <div class="price-meta">仲間と一緒に楽しく／月3〜4回</div>
+        </div>
+        <div class="price-amount"><span class="num">5,000</span><span class="unit">円</span><span class="freq">月額</span></div>
+      </div>
+      <div class="price-row featured">
+        <div>
+          <div class="price-target">個人レッスン</div>
+          <div class="price-meta">レベル別・お一人に合わせて／月3〜4回</div>
+        </div>
+        <div class="price-amount"><span class="num">7,000</span><span class="unit">円〜</span><span class="freq">月額</span></div>
+      </div>
+    </div>
+
+    <div class="lesson-times">
+      <h4><svg viewBox="0 0 24 32" fill="#FF8FC7" width="14" height="19" style="display:inline-block;vertical-align:middle;margin-right:4px;"><ellipse cx="8" cy="26" rx="6" ry="4.5" transform="rotate(-20 8 26)"/><rect x="13" y="4" width="2.2" height="24" rx="1"/><path d="M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z"/></svg> レッスン時間（1回あたり）</h4>
+      <div class="time-chips">
+        <span class="time-chip">30分</span>
+        <span class="time-chip">45分</span>
+        <span class="time-chip">60分</span>
+      </div>
+    </div>
+
+    <p class="lessons-note">
+      ※ 表示は税込価格／入会金 別途・教材費 別途<br />
+      ※ ご家族割引・ペアレッスン割引あり
+    </p>
+  </section>
+
+  <!-- 6. Voices -->
+  <section class="voices" id="voices" data-screen-label="06 Voices">
+    <div class="section-eyebrow left">VOICES</div>
+    <h2 class="section-title">生徒さん・<br />保護者の<span class="accent">声</span></h2>
+
+    <article class="voice-card">
+      <div class="voice-quote-mark">"</div>
+      <div class="voice-stars">★★★★★</div>
+      <h3 class="voice-title">「教室の日が一番楽しい」と<br />娘が言ってくれます</h3>
+      <p class="voice-body">最初は緊張していた4歳の娘も、今ではレッスンの日を毎週楽しみにしています。先生がとても優しくて、できたことをたくさん褒めてくださるので、子ども自身に自信がついてきました。</p>
+      <div class="voice-author">
+        <div class="voice-avatar"><svg viewBox="0 0 32 32" width="20" height="20" fill="none"><path d="M8 14l4-9 6 7z" fill="#78B4E4"/><path d="M24 14l-4-9-6 7z" fill="#78B4E4"/><circle cx="16" cy="20" r="10" fill="#78B4E4"/><circle cx="12" cy="17" r="1.5" fill="#fff"/><circle cx="20" cy="17" r="1.5" fill="#fff"/><ellipse cx="16" cy="22" rx="1.5" ry="1" fill="#fff"/></svg></div>
+        <div>幼児コース・保護者さま<br /><span style="opacity:.7;">Mさん（30代）</span></div>
+      </div>
+    </article>
+
+    <article class="voice-card">
+      <div class="voice-quote-mark">"</div>
+      <div class="voice-stars">★★★★★</div>
+      <h3 class="voice-title">発表会で堂々と弾けるように<br />なりました</h3>
+      <p class="voice-body">3年通っていますが、苦手だった左手も少しずつ動くようになってきました。発表会では、舞台で堂々と弾く息子の姿を見て、感動して泣いてしまいました。</p>
+      <div class="voice-author">
+        <div class="voice-avatar"><svg viewBox="0 0 32 40" width="18" height="22" fill="none"><ellipse cx="12" cy="8" rx="4" ry="10" fill="#FF8FC7"/><ellipse cx="20" cy="8" rx="4" ry="10" fill="#FF8FC7"/><ellipse cx="12" cy="8" rx="2.2" ry="7" fill="#FFDBED"/><ellipse cx="20" cy="8" rx="2.2" ry="7" fill="#FFDBED"/><circle cx="16" cy="26" r="11" fill="#FF8FC7"/><circle cx="12" cy="23" r="1.5" fill="#fff"/><circle cx="20" cy="23" r="1.5" fill="#fff"/><ellipse cx="16" cy="28" rx="1.5" ry="1" fill="#fff"/></svg></div>
+        <div>小学生コース・保護者さま<br /><span style="opacity:.7;">Kさん（40代）</span></div>
+      </div>
+    </article>
+
+    <article class="voice-card">
+      <div class="voice-quote-mark">"</div>
+      <div class="voice-stars">★★★★★</div>
+      <h3 class="voice-title">大人になってから始めて、<br />毎週が楽しみです</h3>
+      <p class="voice-body">40代から始めましたが、先生が一人ひとりに合わせて教えてくださるので無理なく続けられています。弾きたい曲が一曲ずつ増えていくのが何より嬉しいです。</p>
+      <div class="voice-author">
+        <div class="voice-avatar"><svg viewBox="0 0 32 32" width="20" height="20" fill="none"><circle cx="8" cy="8" r="5" fill="#78B4E4" opacity=".7"/><circle cx="24" cy="8" r="5" fill="#78B4E4" opacity=".7"/><circle cx="16" cy="18" r="12" fill="#78B4E4"/><circle cx="11" cy="15" r="1.5" fill="#fff"/><circle cx="21" cy="15" r="1.5" fill="#fff"/><ellipse cx="16" cy="20" rx="2.5" ry="2" fill="#DDEEFF"/></svg></div>
+        <div>大人コース・生徒さま<br /><span style="opacity:.7;">Sさん（40代）</span></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 7. FAQ -->
+  <section class="faq" id="faq" data-screen-label="07 FAQ">
+    <div class="section-eyebrow left">FAQ</div>
+    <h2 class="section-title">よくある<br /><span class="accent">ご質問</span></h2>
+    <div class="faq-list" id="faqList">
+      <div class="faq-item open">
+        <button class="faq-q" aria-expanded="true">何歳から始められますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">4歳ごろから受け入れています。鍵盤に興味を持ち始めたタイミングがおすすめです。まずは体験レッスンで、ピアノに触れてみてくださいね。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">ピアノを持っていないのですが…</button>
+        <div class="faq-a"><div class="faq-a-inner">最初はキーボードや電子ピアノでも大丈夫です。続けられそうな見込みが立った頃に、ご家庭の状況に合った楽器選びをご相談させていただきます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">振替レッスンはありますか？</button>
+        <div class="faq-a"><div class="faq-a-inner">体調不良や学校行事などの場合は、月内で振替対応をしております（前日までのご連絡）。安心して続けていただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">体験レッスンの内容は？</button>
+        <div class="faq-a"><div class="faq-a-inner">所要時間は約30分。簡単な自己紹介のあと、ピアノに実際に触れて1曲ミニチャレンジ。保護者さまの見学もOKです。費用はかかりません。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">男の子でも続けやすいですか？</button>
+        <div class="faq-a"><div class="faq-a-inner">もちろんです。現在も男の子の生徒さんが多数在籍中。お子さまの興味に合わせて、好きな曲も取り入れながら進めていきます。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. News -->
+  <!--
+    【Googleスプレッドシート連動手順】
+    1. Googleスプレッドシートを作成し、以下の列を設ける：
+       A列: 日付      例） 2026/05/20
+       B列: カテゴリ  例） お知らせ / イベント / レッスン
+       C列: タイトル  例） 6月の体験レッスン受付を開始しました
+       D列: 本文      例） 詳細な本文。改行はセル内で Ctrl+Enter。
+       E列: 画像URL   例） https://... （空欄可）
+       F列: NEW表示   例） TRUE または FALSE
+    2. 「ファイル」→「共有」→「ウェブに公開」で「CSV形式」を選び、URLをコピー
+    3. 下記の SPREADSHEET_CSV_URL にそのURLを貼り付け
+    4. シートを更新するだけでサイトに自動反映！
+    ※ 1行目はヘッダー行としてスキップされます
+  -->
+  <section class="news" id="news" data-screen-label="08 News">
+    <div class="section-eyebrow left">INSTAGRAM</div>
+    <h2 class="section-title">お知らせ</h2>
+    <div class="insta-card">
+      <div class="insta-head">
+        <div class="insta-avatar"><div class="inner"><span>🎹</span></div></div>
+        <div class="insta-meta">
+          <div class="insta-handle">@pocoapoco_music <span class="verified">✔</span></div>
+          <div class="insta-stats"><span><b>128</b> 投稿</span><span><b>1,240</b> フォロワー</span></div>
+        </div>
+        <a class="insta-follow" href="https://www.instagram.com/" target="_blank" rel="noopener">フォロー</a>
+      </div>
+      <div class="insta-grid">
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t1">🎀</div>
+          <div class="cap">6月の体験レッスン受付中！</div>
+        </a>
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t2">🎵</div>
+          <div class="cap">夏の発表会の日程決定♪</div>
+        </a>
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t3">🌷</div>
+          <div class="cap">春のミニコンサート開催</div>
+        </a>
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t4">⭐</div>
+          <div class="cap">生徒さんの練習風景</div>
+        </a>
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t5">🎶</div>
+          <div class="cap">新しい楽譜が仲間入り</div>
+        </a>
+        <a class="insta-tile" href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <div class="ph insta-t6">💕</div>
+          <div class="cap">レッスンの様子をお届け</div>
+        </a>
+      </div>
+      <div class="insta-foot">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+          <span>📷</span>Instagramでもっと見る
+        </a>
+      </div>
+    </div>
+    <p class="news-note">最新のお知らせは公式Instagramで配信しています</p>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-container" id="modalContainer">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div class="modal-header-info">
+        <span class="news-tag tag-info" id="modalTag"></span>
+        <h3 class="modal-title" id="modalTitle"></h3>
+        <div class="modal-date" id="modalDate"></div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="閉じる">✕</button>
+    </div>
+    <div class="modal-scroll" id="modalScroll"></div>
+  </div>
+
+  <script>
+  // ============================================================
+  //  ★ Googleスプレッドシート連動設定 ★
+  //  下記のURLを、「ウェブに公開」したCSVのURLに差し替えてください。
+  //  空欄のままはデモデータが表示されます。
+  // ============================================================
+  var SPREADSHEET_CSV_URL = '';
+  var MAX_DISPLAY = 3; // 一覧に表示する件数
+
+  // デモデータ（スプレッドシート未接続時に使用）
+  var DEMO_DATA = [
+    {
+      date: '2026.05.20', tag: 'お知らせ', isNew: true,
+      title: '6月の体験レッスン受付を開始しました',
+      image: '',
+      body: '6月は毎週土曜日 10:00〜12:00 で体験レッスンを実施します。\n\nお子さまはもちろん、大人の方の体験も大歓迎です。「ピアノを弾いてみたい」と思った時が、始めどき。お気軽にお問い合わせください。\n\n■ 対象：4歳以上どなたでも\n■ 費用：無料\n■ 持ち物：特にありません'
+    },
+    {
+      date: '2026.05.12', tag: 'イベント', isNew: false,
+      title: '夏の発表会の日程が決まりました',
+      image: '',
+      body: '今年の夏の発表会は、以下の日程で開催いたします。\n\n■ 日時：2026年8月24日（日）13:00 開演\n■ 会場：○○市民ホール 小ホール\n■ 観覧：ご家族・ご友人の方も入場無料\n\n生徒さん一人ひとりが輝ける舞台です。今年も素敵な演奏をお届けできるよう、レッスンでしっかり準備を進めていきます。\n\nお楽しみに！'
+    },
+    {
+      date: '2026.04.14', tag: 'イベント', isNew: false,
+      title: '春のミニコンサートを開催しました',
+      image: '',
+      body: '4月13日に教室にて春のミニコンサートを開催しました。\n\n生徒さん12名が参加し、それぞれが練習してきた曲を披露。お子さま同士でお互いの演奏を聽き合う機会にもなり、とても温かい時間になりました。\n\n保護者のみなさまからも「家とは違う姿を見ることができて感動しました」という声をいただきました。\n\n次回は夏の発表会（8月予定）です。お楽しみに！'
+    }
+  ];
+
+  // CSVパーサー
+  function parseCSV(text) {
+    var lines = [];
+    var current = '';
+    var inQuotes = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (c === '"') {
+        if (inQuotes && text[i + 1] === '"') { current += '"'; i++; }
+        else { inQuotes = !inQuotes; }
+      } else if ((c === ',' || c === '\n') && !inQuotes) {
+        if (c === '\n') { lines.push(current.split('\t')); current = ''; }
+        else { current += '\t'; }
+      } else if (c !== '\r') {
+        current += c;
+      }
+    }
+    if (current.trim()) lines.push(current.split('\t'));
+    return lines;
+  }
+
+  function csvToArticles(csv) {
+    var lines = parseCSV(csv);
+    if (lines.length < 2) return [];
+    var articles = [];
+    for (var i = 1; i < lines.length; i++) {
+      var cols = lines[i];
+      if (!cols[0] || !cols[2]) continue;
+      var d = cols[0].trim().replace(/\//g, '.');
+      articles.push({
+        date: d,
+        tag: (cols[1] || 'お知らせ').trim(),
+        title: cols[2].trim(),
+        body: (cols[3] || '').trim(),
+        image: (cols[4] || '').trim(),
+        isNew: (cols[5] || '').trim().toUpperCase() === 'TRUE'
+      });
+    }
+    return articles;
+  }
+
+  // モーダル制御
+  var modalOverlay = document.getElementById('modalOverlay');
+  var modalContainer = document.getElementById('modalContainer');
+  var modalClose = document.getElementById('modalClose');
+  var modalTag = document.getElementById('modalTag');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalDate = document.getElementById('modalDate');
+  var modalScroll = document.getElementById('modalScroll');
+  var tagClassMap = { 'お知らせ': 'tag-info', 'イベント': 'tag-event', 'レッスン': 'tag-lesson' };
+
+  function openModal(article) {
+    modalTag.textContent = article.tag;
+    modalTag.className = 'news-tag ' + (tagClassMap[article.tag] || 'tag-info');
+    modalTitle.textContent = article.title;
+    modalDate.textContent = article.date;
+    var html = '';
+    if (article.image) {
+      html += '<img class="modal-hero-img" src="' + article.image + '" alt="" />';
+    }
+    html += '<div class="modal-article">';
+    var paragraphs = article.body.split(/\n\n|\\n\\n/);
+    paragraphs.forEach(function(p) {
+      var text = p.replace(/\n|\\n/g, '<br />');
+      html += '<p>' + text + '</p>';
+    });
+    html += '</div>';
+    modalScroll.innerHTML = html;
+    modalScroll.scrollTop = 0;
+    modalOverlay.classList.add('active');
+    modalContainer.classList.add('active');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    modalContainer.classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+  modalOverlay.addEventListener('click', closeModal);
+  modalClose.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // レンダリング
+  function renderNewsList(articles) {
+    var list = document.getElementById('newsList');
+    if (!list) return;
+    var shown = articles.slice(0, MAX_DISPLAY);
+    var html = '';
+    shown.forEach(function(item, idx) {
+      var tagClass = tagClassMap[item.tag] || 'tag-info';
+      html += '<div class="news-item' + (item.isNew ? ' is-new' : '') + '" data-idx="' + idx + '">';
+      html += '  <div class="news-date">' + item.date + '</div>';
+      html += '  <div class="news-body">';
+      html += '    <span class="news-tag ' + tagClass + '">' + item.tag + '</span>';
+      html += '    <p class="news-title">' + item.title + '</p>';
+      if (item.body) {
+        var excerpt = item.body.replace(/\\n/g, ' ').replace(/\n/g, ' ');
+        if (excerpt.length > 60) excerpt = excerpt.substring(0, 60) + '…';
+        html += '    <div class="news-excerpt">' + excerpt + '</div>';
+      }
+      html += '    <span class="news-read-more">続きを読む ›</span>';
+      html += '  </div>';
+      html += '</div>';
+    });
+    list.innerHTML = html;
+
+    // クリックイベント
+    list.querySelectorAll('.news-item').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var idx = parseInt(el.getAttribute('data-idx'), 10);
+        openModal(shown[idx]);
+      });
+    });
+  }
+
+  // データ取得
+  (function loadNews() {
+    if (!SPREADSHEET_CSV_URL) {
+      renderNewsList(DEMO_DATA);
+      return;
+    }
+    fetch(SPREADSHEET_CSV_URL)
+      .then(function(r) { return r.text(); })
+      .then(function(csv) {
+        var articles = csvToArticles(csv);
+        if (articles.length === 0) {
+          renderNewsList(DEMO_DATA);
+        } else {
+          renderNewsList(articles);
+        }
+      })
+      .catch(function() {
+        renderNewsList(DEMO_DATA);
+      });
+  })();
+  </script>
+
+  <!-- 9. Access -->
+  <section class="access" id="access" data-screen-label="09 Access">
+    <div class="section-eyebrow left">ACCESS</div>
+    <h2 class="section-title">アクセス</h2>
+
+    <!-- 桂坂教室 -->
+    <div class="access-store">
+      <span class="store-badge"><span class="pin">📍</span>桂坂教室</span>
+      <div class="map-area" aria-label="Google Maps 埋め込みエリア">
+        <div class="map-pin"></div>
+        <div class="map-label">// Google Maps embed area</div>
+      </div>
+      <div class="access-info">
+        <div class="access-row">
+          <div class="access-label">住所</div>
+          <div class="access-value">京都市西京区○○町1-2-3</div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">最寄駅</div>
+          <div class="access-value">阪急線「○○駅」より<br /><strong>徒歩5分</strong></div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">駐車場</div>
+          <div class="access-value">あり（2台分）<br /><span class="small">事前にお知らせください</span></div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">レッスン<br />時間</div>
+          <div class="access-value">平日 13:00 – 20:00<br />土曜 9:00 – 17:00<br /><span class="small">日曜・祝日は応相談</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 梅津教室 -->
+    <div class="access-store">
+      <span class="store-badge blue"><span class="pin">📍</span>梅津教室</span>
+      <div class="map-embed">
+        <iframe
+          src="https://maps.google.com/maps?q=%E4%BA%AC%E9%83%BD%E5%B8%82%E5%8F%B3%E4%BA%AC%E5%8C%BA%E6%A2%85%E6%B4%A5%E8%A5%BF%E6%B5%A6%E7%94%BA16-11&z=16&output=embed"
+          loading="lazy"
+          title="梅津教室の地図"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="access-info">
+        <div class="access-row">
+          <div class="access-label">住所</div>
+          <div class="access-value">京都市右京区梅津西浦町16-11</div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">最寄</div>
+          <div class="access-value">バス停「梅津西浦町」より<br /><strong>徒歩3分</strong></div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">駐車場</div>
+          <div class="access-value">あり（2台分）<br /><span class="small">事前にお知らせください</span></div>
+        </div>
+        <div class="access-row">
+          <div class="access-label">レッスン<br />時間</div>
+          <div class="access-value">平日 10:00 – 19:00<br />土曜 9:00 – 18:00<br /><span class="small">日曜・祝日は応相談</span></div>
+        </div>
+        <div class="access-row">
+          <div class="access-label"></div>
+          <div class="access-value"><a href="https://maps.app.goo.gl/GSpnxXCxRD8ekaZv6" target="_blank" rel="noopener" style="color:var(--pink-dark);font-weight:700;text-decoration:none;">Googleマップで開く ›</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Contact -->
+  <section class="contact" id="contact" data-screen-label="10 Contact">
+    <div class="section-eyebrow left">CONTACT</div>
+    <h2 class="section-title">まずは無料で<br /><span class="accent">体験レッスン</span>へ</h2>
+    <p class="contact-lead">
+      強引な勧誘は一切ありません。<br />
+      ピアノに触れてみる、<br />それだけでも大歓迎です。
+    </p>
+
+    <div class="contact-tel-card">
+      <div class="contact-tel-label">お電話はこちら</div>
+      <a class="contact-tel-num" href="tel:0123456789">0123-45-6789</a>
+      <div class="contact-tel-hours">受付：平日 10:00 – 19:00</div>
+    </div>
+
+    <div class="contact-buttons">
+      <a href="#" class="btn-primary">
+        <span class="badge">無料</span>
+        <span>体験レッスンを申し込む</span>
+        <span class="arrow">→</span>
+      </a>
+      <a href="#" class="btn-secondary btn-line">
+        <span>＠</span>
+        <span>LINEで気軽に問い合わせる</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand-name" style="display:flex;align-items:center;justify-content:center;gap:6px;">
+      <svg viewBox="0 0 24 32" fill="rgba(255,255,255,0.7)" width="12" height="16"><ellipse cx="8" cy="26" rx="6" ry="4.5" transform="rotate(-20 8 26)"/><rect x="13" y="4" width="2.2" height="24" rx="1"/><path d="M15.2 4 C20 6 22 12 18 16 C16 13 15.2 10 15.2 8z"/></svg>
+      Poco a Poco音楽教室♪
+    </div>
+    <div>© 2026 Poco a Poco Music School — Demo Landing Page</div>
+  </footer>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-cta">
+    <a class="btn-tel" href="tel:0123456789" aria-label="電話で問い合わせる">☏</a>
+    <a class="btn-primary" href="#contact">
+      <span class="badge">無料</span>
+      <span>体験レッスン申込</span>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      // Optional: close others for cleaner UX
+      // document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  // Menu open/close
+  const body = document.body;
+  const menuToggle = document.getElementById('menuToggle');
+  const menuClose = document.getElementById('menuClose');
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuPanel = document.getElementById('menuPanel');
+  function openMenu() {
+    body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    menuPanel.setAttribute('aria-hidden', 'false');
+  }
+  function closeMenu() {
+    body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuPanel.setAttribute('aria-hidden', 'true');
+  }
+  menuToggle.addEventListener('click', () => {
+    body.classList.contains('menu-open') ? closeMenu() : openMenu();
+  });
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+  });
+
+  // Smooth scroll for internal links (with sticky top-bar offset, no scrollIntoView)
+  function smoothScrollTo(target) {
+    const topBar = document.querySelector('.top-bar');
+    const offset = topBar ? topBar.getBoundingClientRect().height + 8 : 0;
+    const y = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const targetId = a.getAttribute('href');
+      if (targetId.length > 1) {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          // Close menu first, then scroll after a brief delay for the slide-out
+          const wasOpen = body.classList.contains('menu-open');
+          if (wasOpen) closeMenu();
+          setTimeout(() => smoothScrollTo(target), wasOpen ? 200 : 0);
+        }
+      }
+    });
+  });
+
+  // Hide sticky CTA when contact section is visible to avoid duplication
+  const contactSection = document.getElementById('contact');
+  const stickyCta = document.querySelector('.sticky-cta');
+  if (contactSection && stickyCta && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        stickyCta.style.opacity = entry.isIntersecting ? '0' : '1';
+        stickyCta.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+        stickyCta.style.transition = 'opacity 0.3s';
+      });
+    }, { threshold: 0.3 });
+    io.observe(contactSection);
+  }
+</script>
+</body>
+</html>
